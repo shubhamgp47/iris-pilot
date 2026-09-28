@@ -1,0 +1,38 @@
+[
+  {
+    "source_id": "PARCEL-DE-001",
+    "country_code": "DE",
+    "region_code": "BY",
+    "source_date": "2024-02-01",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [11.0120, 49.5910],
+          [11.0180, 49.5910],
+          [11.0180, 49.5960],
+          [11.0120, 49.5960],
+          [11.0120, 49.5910]
+        ]
+      ]
+    }
+  },
+  {
+    "source_id": "PARCEL-DE-002",
+    "country_code": "DE",
+    "region_code": "BY",
+    "source_date": "2024-02-01",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [11.2000, 49.7000],
+          [11.2050, 49.7000],
+          [11.2050, 49.7050],
+          [11.2000, 49.7050],
+          [11.2000, 49.7000]
+        ]
+      ]
+    }
+  }
+]

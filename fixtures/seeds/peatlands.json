@@ -1,0 +1,22 @@
+[
+  {
+    "source_id": "PEAT-DE-001",
+    "country_code": "DE",
+    "region_code": "BY",
+    "condition_class": "drained_agricultural",
+    "baseline_eco_factor": 8.0,
+    "source_date": "2023-11-20",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [11.0150, 49.5920],
+          [11.0250, 49.5920],
+          [11.0250, 49.5980],
+          [11.0150, 49.5980],
+          [11.0150, 49.5920]
+        ]
+      ]
+    }
+  }
+]

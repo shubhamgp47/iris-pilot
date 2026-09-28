@@ -1,0 +1,26 @@
+[
+  {
+    "source_id": "SUB-DE-001",
+    "country_code": "DE",
+    "region_code": "BY",
+    "name": "Erlangen Nord Substation",
+    "voltage_kv": 110.0,
+    "source_date": "2024-01-15",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [11.0100, 49.5900]
+    }
+  },
+  {
+    "source_id": "SUB-DE-002",
+    "country_code": "DE",
+    "region_code": "BY",
+    "name": "Nuremberg West Substation",
+    "voltage_kv": 220.0,
+    "source_date": "2024-01-15",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [11.0800, 49.4500]
+    }
+  }
+]
