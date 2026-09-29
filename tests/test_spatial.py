@@ -1,9 +1,7 @@
-# tests/test_spatial.py
 import pytest
 
 def test_canonical_column_contracts(db_cursor):
     """
-    Acceptance Criterion 2 & Contract Rule:
     Must contain geom, country_code, region_code, source_id, source_date, created_at.
     Column 'geometry' must NOT exist in iris_core entities.
     """
@@ -29,7 +27,6 @@ def test_canonical_column_contracts(db_cursor):
 
 def test_spatial_round_trip_and_srid(db_cursor):
     """
-    Acceptance Criterion 4:
     Verify SRID is 4326 and coordinates round-trip accurately.
     """
     db_cursor.execute(

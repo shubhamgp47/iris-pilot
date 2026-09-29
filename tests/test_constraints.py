@@ -1,10 +1,8 @@
-# tests/test_constraints.py
 import pytest
 import psycopg
 
 def test_country_code_cannot_be_null(db_conn, db_cursor):
     """
-    Acceptance Criterion 3 & High-Risk Invariant:
     country_code must be NOT NULL on every persisted business entity.
     """
     with pytest.raises(psycopg.errors.NotNullViolation):

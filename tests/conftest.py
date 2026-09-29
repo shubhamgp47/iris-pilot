@@ -1,4 +1,3 @@
-# tests/conftest.py
 import pytest
 from src.db import get_connection
 
