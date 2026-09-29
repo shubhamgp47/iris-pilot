@@ -1,6 +1,6 @@
 # Project IRIS — Canonical PostGIS Pilot Schema
 
-Production-grade foundational spatial database schema and prospecting engine for **Project IRIS**, implementing automated land screening for two pilot verticals:
+Foundational spatial database schema and prospecting engine for **Project IRIS**, implementing automated land screening for two pilot verticals:
 
 1. **BESS (Battery Energy Storage Systems):** Land parcel grid proximity screening against high-voltage electrical substations.
 2. **Peatland Restoration / Eco-Points:** Environmental land condition screening to calculate indicative baseline ecological compensation units.
