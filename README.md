@@ -50,7 +50,7 @@ make reset
 
 ### CLI Command Reference
 
-| Unix Target | Windows Target | Purpose |
+| Unix | Windows | Purpose |
 | :--- | :--- | :--- |
 | `make up` | `python run.py up` | Start PostgreSQL 16 + PostGIS 3.4 Docker container |
 | `make down` | `python run.py down` | Stop container and wipe data volumes |
@@ -101,7 +101,7 @@ make reset
 
 ### A. Dual-Schema Strategy: Staging vs. Core
 
-- **`iris_staging` (Landing Zone):** Ingests raw cadastre boundaries and spatial assets from disparate national sources (e.g., German ALKIS, UK HM Land Registry, OpenStreetMap). Fields are typed permissively (`TEXT`, unparsed `JSON`), with no foreign key dependencies or topological geometry constraints. This guarantees ingestion runs do not fail mid-batch due to minor source anomalies.
+- **`iris_staging` (Landing Zone):** Ingests raw land boundaries and spatial assets from various sources. Fields are typed permissively (`TEXT`, unparsed `JSON`), with no foreign key dependencies or topological geometry constraints. This guarantees ingestion runs do not fail mid-batch due to minor source anomalies.
 - **`iris_core` (Canonical Model):** Represents the curated single source of truth. Enforces strict domain constraints, valid PostGIS geometries, non-null country codes, and normalized referential integrity.
 - **Controlled Promotion (`src/loader.py`):** Acts as the ELT transform step. Coordinates are parsed using `ST_GeomFromGeoJSON()`, projected with `ST_SetSRID()`, forced into uniform collections via `ST_Multi()`, geodesic surface areas are computed in $\text{m}^2$, and records are promoted into `iris_core`.
 
@@ -232,12 +232,8 @@ The test suite in `tests/` covers the highest-risk correctness conditions:
 | :--- | :--- | :--- |
 | **Table Partitioning** | Single unpartitioned tables | Declarative PostgreSQL list partitioning on `country_code` (`PARTITION BY LIST (country_code)`) for parcel and evidence. The composite primary key `(country_code, parcel_id)` was designed to support this migration without schema changes. |
 | **CRS Strategy** | Canonical `EPSG:4326` with on-the-fly `geography` casts | In addition to global SRID 4326, maintain projected planar columns per national grid (e.g., `EPSG:25832` / UTM Zone 32N for Germany, `EPSG:27700` for the UK) to run 2D planar metric operations without ellipsoidal math overhead. |
-| **Migration Tooling** | Sequential Python script executing raw SQL files | Transition to an enterprise database migration framework (e.g., Flyway, Liquibase, or Alembic) integrated with CI/CD deployment pipelines. |
-| **Ingestion Scale** | Synchronous Python seed loader reading local JSON | Distributed asynchronous ELT pipelines (e.g., Celery/Temporal workers) streaming raw national cadastre archives directly into staging tables before executing promotion stored procedures. |
+| **Migration Tooling** | Sequential Python script executing raw SQL files | Transition to an enterprise database migration framework like Flyway integrated with CI/CD deployment pipelines. |
+| **Ingestion Scale** | Synchronous Python seed loader reading local JSON | Distributed asynchronous ELT pipelines streaming raw national cadastre archives directly into staging tables before executing promotion stored procedures. |
 | **Provenance Tracking** | Table-level run logging in `source_run` | Row-level lineage via `source_run_id BIGINT REFERENCES source_run(run_id)` on every core entity row. |
 
 ---
-
-## 8. Reference Uncertainty Disclaimer
-
-> **Notice:** Preliminary prospecting material. Figures, eco-point estimates, and site suitability are indicative and based on available source data and commercial screening assumptions. The $8\text{ eco-points/m}^2$ factor is the current commercial baseline, not certified compensation. Ownership, planning, grid capacity, environmental eligibility, and transferability remain subject to project-specific verification. No permit, reservation, or construction readiness is represented.
