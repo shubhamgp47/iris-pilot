@@ -4,7 +4,10 @@ DROP TABLE IF EXISTS iris_staging.stg_peatland CASCADE;
 
 -- One staging table per raw data source
 
--- Raw landing table for parcels (land ownership boundaries, Land registry in XYZ country)
+--  Unconstrained tables with loose typing (text fields, staging IDs, ingestion timestamps) to allow ingestion without failing
+--  on dirty source data.
+
+-- Raw landing table for parcels (land ownership boundaries, land registry in XYZ country)
 CREATE TABLE iris_staging.stg_parcel (
     staging_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     source_id TEXT,
@@ -22,8 +25,8 @@ CREATE TABLE iris_staging.stg_substation (
     source_id TEXT,
     country_code TEXT,
     region_code TEXT,
-    substation_name TEXT, --human-readable identifier
-    voltage_kv TEXT, --for BESS
+    substation_name TEXT, --substation identifier
+    voltage_kv TEXT, --voltage level of the substation
     raw_geom TEXT,
     source_date TEXT,
     metadata JSONB,
@@ -36,7 +39,7 @@ CREATE TABLE iris_staging.stg_peatland (
     source_id TEXT,
     country_code TEXT,
     region_code TEXT,
-    condition_class TEXT,   -- e.g., 'drained', 'degraded', 'near-natural'
+    condition_class TEXT,   -- drained, degraded, near-natural, etc
     raw_geom TEXT,
     source_date TEXT,
     metadata JSONB,

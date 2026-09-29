@@ -1,4 +1,3 @@
-# src/migrate.py
 from pathlib import Path
 from src.db import get_connection
 

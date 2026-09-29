@@ -4,6 +4,7 @@ Works on Windows, macOS, and Linux without needing 'make'.
 """
 import sys
 import subprocess
+import time
 
 def run(cmd: str):
     print(f"\n>> Running: {cmd}")
@@ -35,7 +36,6 @@ def main():
         run("docker compose down -v")
         run("docker compose up -d")
         print("Waiting for Postgres/PostGIS container...")
-        import time
         time.sleep(4)
         run("python -m src.migrate")
         run("python -m src.loader")

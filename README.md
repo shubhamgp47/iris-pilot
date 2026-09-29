@@ -11,8 +11,6 @@ Built with **PostgreSQL 16+**, **PostGIS 3.4+**, and **Python 3.12+**.
 
 ## 1. Quickstart & One-Command Rebuild
 
-This project satisfies **Acceptance Criterion 1: Schema rebuilds from empty DB without manual intervention** via zero-touch lifecycle scripts for both Windows and Unix environments.
-
 ### Prerequisites
 
 - Docker & Docker Compose
