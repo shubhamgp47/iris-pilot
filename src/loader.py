@@ -5,11 +5,12 @@ from src.db import get_connection
 SEEDS_DIR = Path(__file__).parent.parent / "fixtures" / "seeds"
 
 def seed_screening_layers(cur):
+    """Seed the iris_core.screening_layer table with predefined screening layers"""
     layers = [
-        ("GRID_BESS_PROXIMITY", "Substation Grid Proximity", "Evaluates parcel distance to nearest electrical substation", "BESS"),
-        ("PEATLAND_RESTORATION", "Peatland Restoration Overlap", "Screens parcel area overlapping degraded peatland for eco-points", "PEATLAND"),
+        ("GRID_BESS_PROXIMITY", "Substation Grid Proximity", "Evaluates parcel distance to nearest electrical substation", "BESS"), # BESS prospecting rule
+        ("PEATLAND_RESTORATION", "Peatland Restoration Overlap", "Screens parcel area overlapping degraded peatland for eco-points", "PEATLAND"), # paetland restoration rule
     ]
-    cur.executemany(
+    cur.executemany( # prepares the SQL statement once and executes it for every tuple in the layers sequence
         """
         INSERT INTO iris_core.screening_layer (layer_code, layer_name, description, vertical)
         VALUES (%s, %s, %s, %s)
@@ -28,6 +29,7 @@ def seed_source_run(cur, source_name: str, country_code: str, count: int):
     )
 
 def load_and_promote_substations(cur):
+    """Load substations from JSON and promote to iris_core.substation"""
     with open(SEEDS_DIR / "substations.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 

@@ -1,4 +1,3 @@
-# src/queries.py
 import json
 from src.db import get_connection
 
@@ -130,9 +129,11 @@ def demonstrate_index_usage(cur):
     print("ACCEPTANCE CRITERIA 4: PROOF OF SPATIAL GIST INDEX USAGE")
     print("=" * 70)
 
-    # Disable sequential scans in this session to display the index scan path
+    # Disable sequential scans in this session to display the index scan path as PostgreSQL will naturally prefer a Sequential Scan with only a few rows in the table. 
+    # Temporarily sets the cost of sequential scans artificially high forcing PostgreSQL to use index scan path
     cur.execute("SET enable_seqscan = OFF;")
 
+    # Use EXPLAIN to show the query plan for the spatial join between parcels and peatlands instead of executing the query.
     explain_sql = """
     EXPLAIN (COSTS OFF)
     SELECT p.parcel_id, peat.peatland_id
