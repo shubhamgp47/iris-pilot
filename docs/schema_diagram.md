@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     source_run {
         bigint run_id PK
@@ -61,3 +62,4 @@ erDiagram
 
     parcel ||--o{ evidence : "scoped by (country_code, parcel_id)"
     screening_layer ||--o{ evidence : "categorized by layer_id"
+```
