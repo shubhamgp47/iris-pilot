@@ -1,4 +1,3 @@
-# Project IRIS - Canonical PostGIS Schema Model
 erDiagram
     source_run {
         bigint run_id PK
@@ -18,7 +17,7 @@ erDiagram
         timestamptz created_at
     }
     substation {
-        bigint substation_id
+        bigint substation_id PK
         char country_code PK
         varchar region_code
         varchar source_id UK
@@ -29,7 +28,7 @@ erDiagram
         timestamptz created_at
     }
     parcel {
-        bigint parcel_id
+        bigint parcel_id PK
         char country_code PK
         varchar region_code
         varchar source_id UK
@@ -39,7 +38,7 @@ erDiagram
         timestamptz created_at
     }
     peatland {
-        bigint peatland_id
+        bigint peatland_id PK
         char country_code PK
         varchar region_code
         varchar source_id UK
@@ -49,9 +48,9 @@ erDiagram
         geometry geom "MultiPolygon, SRID 4326"
         timestamptz created_at
     }
-     evidence {
-        bigint evidence_id
-        char country_code PK
+    evidence {
+        bigint evidence_id PK
+        char country_code FK,PK
         bigint parcel_id FK
         bigint layer_id FK
         varchar verdict
@@ -59,5 +58,6 @@ erDiagram
         timestamptz evaluated_at
         timestamptz created_at
     }
+
     parcel ||--o{ evidence : "scoped by (country_code, parcel_id)"
     screening_layer ||--o{ evidence : "categorized by layer_id"
